@@ -11,9 +11,10 @@ class Task:
         return f"{status} {self.description}"
 
 class TodoList:
-    def __init__(self, name):
+    def __init__(self, name, listbox):
         self.name = name
         self.tasks = []
+        self.listbox = listbox
 
     def add_task(self, task):
         self.tasks.append(task)
@@ -48,12 +49,15 @@ class TodoList:
         for task in self.tasks:
             self.listbox.insert(tk.END, str(task))
 
+
 class App:
     def __init__(self, master):
         self.master = master
         self.master.title("Game Development TODO List")
 
-        self.todo_list = TodoList("Game Development TODO List")
+        self.listbox = tk.Listbox(self.master, width=50)
+
+        self.todo_list = TodoList("Game Development TODO List", self.listbox)
 
         self.add_task_entry = tk.Entry(self.master)
         self.add_task_button = tk.Button(self.master, text="Add Task", command=self.add_task)
@@ -90,37 +94,42 @@ class App:
 
     def mark_task_complete(self):
         selection = self.listbox.curselection()
-        if selection
-        task = self.todo_list.tasks[selection[0]]
-        self.todo_list.mark_task_complete(task)
+        if selection:
+            task = self.todo_list.tasks[selection[0]]
+            self.todo_list.mark_task_complete(task)
 
     def mark_task_incomplete(self):
         selection = self.listbox.curselection()
         if selection:
-           task = self.todo_list.tasks[selection[0]]
-           self.todo_list.mark_task_incomplete(task)
+            task = self.todo_list.tasks[selection[0]]
+            self.todo_list.mark_task_incomplete(task)
 
     def save(self):
         filename = tk.filedialog.asksaveasfilename(defaultextension=".json")
         if filename:
-           self.todo_list.save(filename)
+            self.todo_list.save(filename)
 
     def load(self):
         filename = tk.filedialog.askopenfilename(defaultextension=".json")
         if filename:
-           self.todo_list.load(filename)
+            self.todo_list.load(filename)
 
     def on_select(self, event):
-        selection = event.widget.curselection()
+        selection = self.listbox.curselection()
         if selection:
-           task = self.todo_list.tasks[selection[0]]
-           if task.completed:
-              self.complete_task_button.config(state=tk.DISABLED)
-              self.incomplete_task_button.config(state=tk.NORMAL)
-           else:
-              self.complete_task_button.config(state=tk.NORMAL)
-              self.incomplete_task_button.config(state=tk.DISABLED)
+            task = self.todo_list.tasks[selection[0]]
+            if task.completed:
+                self.incomplete_task_button.config(state=tk.NORMAL)
+                self.complete_task_button.config(state=tk.DISABLED)
+            else:
+                self.incomplete_task_button.config(state=tk.DISABLED)
+                self.complete_task_button.config(state=tk.NORMAL)
 
-root = tk.Tk()
-app = App(root)
-root.mainloop()
+    def run(self):
+        self.master.mainloop()
+
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = App(root)
+    app.todo_list.load("json//todo_list.json")
+    app.run()

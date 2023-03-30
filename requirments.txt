@@ -1,0 +1,5 @@
+Pillow
+pyboy
+requests
+os
+json

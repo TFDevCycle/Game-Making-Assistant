@@ -1,0 +1,17 @@
+{
+    "name": "Game Development TODO List",
+    "tasks": [
+        {
+            "description": "Create player sprite",
+            "completed": true
+        },
+        {
+            "description": "Add collision detection",
+            "completed": false
+        },
+        {
+            "description": "Implement game over screen",
+            "completed": false
+        }
+    ]
+}
