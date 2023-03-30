@@ -36,14 +36,18 @@ To use the Gameboy Game-Making Assistant, follow these steps:
 2. Use the tileset creator tool to create your tilesets.
 3. Use the map editor tool to create your maps using the sprites and tilesets you created.
 4. Use the code generator tool to generate Gameboy-compatible code for your sprites, tilesets, and maps.
-5. Copy and paste the generated code into your Gameboy development environment.
+5. Copy and paste the generated code into your Gameboy development environment
+6. A GitHub Repo Overview, where you can easily Download files, it is more easier than the normal way
 
 ## Credits
 
 This tool was created by DevCycle as part of a personal project. It uses the following libraries:
 
-- Pygame
 - PIL (Python Imaging Library)
+- Tkinter (Python Framework)
+- PyBoy (GameBoy Emulator)
+- OS
+- JSON
 
 ## License
 
