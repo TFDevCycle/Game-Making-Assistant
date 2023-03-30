@@ -94,32 +94,32 @@ class App:
         task = self.todo_list.tasks[selection[0]]
         self.todo_list.mark_task_complete(task)
 
-def mark_task_incomplete(self):
-    selection = self.listbox.curselection()
-    if selection:
-        task = self.todo_list.tasks[selection[0]]
-        self.todo_list.mark_task_incomplete(task)
+    def mark_task_incomplete(self):
+        selection = self.listbox.curselection()
+        if selection:
+           task = self.todo_list.tasks[selection[0]]
+           self.todo_list.mark_task_incomplete(task)
 
-def save(self):
-    filename = tk.filedialog.asksaveasfilename(defaultextension=".json")
-    if filename:
-        self.todo_list.save(filename)
+    def save(self):
+        filename = tk.filedialog.asksaveasfilename(defaultextension=".json")
+        if filename:
+           self.todo_list.save(filename)
 
-def load(self):
-    filename = tk.filedialog.askopenfilename(defaultextension=".json")
-    if filename:
-        self.todo_list.load(filename)
+    def load(self):
+        filename = tk.filedialog.askopenfilename(defaultextension=".json")
+        if filename:
+           self.todo_list.load(filename)
 
-def on_select(self, event):
-    selection = event.widget.curselection()
-    if selection:
-        task = self.todo_list.tasks[selection[0]]
-        if task.completed:
-            self.complete_task_button.config(state=tk.DISABLED)
-            self.incomplete_task_button.config(state=tk.NORMAL)
-        else:
-            self.complete_task_button.config(state=tk.NORMAL)
-            self.incomplete_task_button.config(state=tk.DISABLED)
+    def on_select(self, event):
+        selection = event.widget.curselection()
+        if selection:
+           task = self.todo_list.tasks[selection[0]]
+           if task.completed:
+              self.complete_task_button.config(state=tk.DISABLED)
+              self.incomplete_task_button.config(state=tk.NORMAL)
+           else:
+              self.complete_task_button.config(state=tk.NORMAL)
+              self.incomplete_task_button.config(state=tk.DISABLED)
 
 root = tk.Tk()
 app = App(root)
